@@ -1,9 +1,19 @@
-var express = require('express');
-var router = express.Router();
+const mongoose = require('mongoose');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+const userSchema = mongoose.Schema({
+  username: String,
+  name: String,
+  age: Number,
+  description: String,
+  categories: {
+    type: Array,
+    default: []
+  },
+  created_at: {
+    type: Date,
+    default: Date.now()
+  }
+
 });
 
-module.exports = router;
+module.exports = mongoose.model('users', userSchema);
